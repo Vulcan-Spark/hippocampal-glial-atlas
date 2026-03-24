@@ -9,8 +9,15 @@ Original file is located at
 # **Phase 1: Setup & Installation**
 """
 
-# Install the Allen toolkit
-!pip install "abc_atlas_access[notebooks] @ git+https://github.com/alleninstitute/abc_atlas_access.git"
+# Install the Allen toolkit for streamlit
+import subprocess
+import sys
+
+def install():
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "abc_atlas_access[notebooks] @ git+https://github.com/alleninstitute/abc_atlas_access.git"])
+
+# Call the function
+install()
 
 # Install the analysis tools
 !pip install scanpy squidpy
