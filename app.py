@@ -362,7 +362,7 @@ with st.sidebar:
     <a href='https://doi.org/10.5281/zenodo.17778234' style='color:#5ecfb0;'>📦 Zenodo</a> ·
     <a href='https://github.com/Vulcan-Spark' style='color:#5ecfb0;'>💻 GitHub</a><br><br>
     Oluwapelumi Solagbade<br>
-    OAU, Nigeria · 2025
+    COHS, OAU, Nigeria · 2025
     </small>
     """, unsafe_allow_html=True)
 
