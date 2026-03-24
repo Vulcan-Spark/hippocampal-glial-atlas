@@ -236,7 +236,7 @@ If you use this analysis, data, or code, please cite:
 
 ## About
 
-This work was conducted by **Oluwapelumi Solagbade** (MBChB Candidate, Obafemi Awolowo University, Nigeria) as an independent computational study in the Eagle Research Laboratory, Ladoke Akintola University of Technology (LAUTECH), Nigeria.
+This work was conducted by **Oluwapelumi Solagbade** (MBChB Candidate,College of Health Science,  Obafemi Awolowo University, Nigeria) as an independent computational study. 
 
 This project demonstrates that high-impact spatial transcriptomics research can be conducted in resource-limited settings using entirely open-access data and infrastructure — a deliberate proof-of-concept for African computational neuroscience.
 
