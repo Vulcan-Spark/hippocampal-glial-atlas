@@ -1,6 +1,24 @@
+# Core App Framework
 streamlit>=1.32.0
-plotly>=5.18.0
+
+# Data & Numerical Processing
 pandas>=2.0.0
 numpy>=1.24.0
 scipy>=1.10.0
 anndata>=0.10.0
+
+# Visualization
+plotly>=5.18.0
+matplotlib
+seaborn
+holoviews
+bokeh
+
+# Bioinformatics & Atlas Access
+# This line is critical for accessing the Allen Institute data
+abc_atlas_access[notebooks] @ git+https://github.com/alleninstitute/abc_atlas_access.git
+
+# Spatial Omics & Analysis
+scanpy
+squidpy
+gprofiler-official
