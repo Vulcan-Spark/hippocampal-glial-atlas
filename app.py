@@ -32,114 +32,93 @@ st.set_page_config(
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap');
 
+  /* Base Theme - Deep Obsidian & Teal */
   html, body, [class*="css"] {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   .stApp {
-    background: #05070a;
-    color: #e8ede8;
+    background: radial-gradient(circle at top left, #0a111a, #05070a);
+    color: #cbd5e1;
   }
+
+  /* Typography Refinement */
   .main-header {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: #5ecfb0;
-    letter-spacing: 0.2em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #2dd4bf; /* Mint Teal */
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    opacity: 0.8;
   }
   .hero-title {
-    font-size: 2.8rem;
-    font-weight: 300;
-    color: #e8ede8;
-    line-height: 1.15;
-    margin-bottom: 0.3rem;
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
-  .hero-title span { color: #5ecfb0; }
-  .hero-sub {
-    font-size: 1rem;
-    color: #8fa89a;
-    margin-bottom: 1.5rem;
+  .hero-title span { 
+    background: linear-gradient(90deg, #2dd4bf, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
+
+  /* Glassmorphism Metric Cards */
   .metric-card {
-    background: rgba(26,33,40,0.7);
-    border: 1px solid rgba(94,207,176,0.12);
-    border-radius: 8px;
-    padding: 1.2rem 1.5rem;
-    text-align: center;
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+  .metric-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(45, 212, 191, 0.3);
   }
   .metric-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 2rem;
-    color: #5ecfb0;
-    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
+    color: #f8fafc;
+    font-weight: 400;
   }
   .metric-label {
-    font-size: 0.75rem;
-    color: #5a7269;
+    font-size: 0.7rem;
+    color: #94a3b8;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 0.2rem;
+    letter-spacing: 0.15em;
   }
+
+  /* Finding Cards with Accent Borders */
   .finding-card {
-    background: rgba(26,33,40,0.5);
-    border: 1px solid rgba(94,207,176,0.07);
-    border-radius: 8px;
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.3));
+    border-radius: 12px;
     padding: 1.5rem;
-    margin-bottom: 1rem;
-    border-left: 3px solid #5ecfb0;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid #3b82f6; /* Electric Blue */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   }
   .finding-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    color: #5ecfb0;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #3b82f6;
+    font-weight: 600;
   }
-  .finding-text { font-size: 0.9rem; color: #8fa89a; line-height: 1.7; }
-  .gene-chip {
-    display: inline-block;
-    background: rgba(94,207,176,0.1);
-    border: 1px solid rgba(94,207,176,0.3);
-    border-radius: 4px;
-    padding: 0.2rem 0.6rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: #5ecfb0;
-    margin: 0.2rem;
+  
+  /* Sidebar Styling */
+  [data-testid="stSidebar"] {
+    background-color: #030712 !important;
+    border-right: 1px solid rgba(255,255,255,0.05);
   }
-  .section-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: #5ecfb0;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-  h2 { color: #e8ede8 !important; font-weight: 300 !important; }
-  h3 { color: #8fa89a !important; font-weight: 400 !important; }
-  .stSelectbox label, .stMultiSelect label, .stSlider label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: #5a7269 !important;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .disclaimer {
-    background: rgba(212,168,90,0.08);
-    border: 1px solid rgba(212,168,90,0.2);
-    border-radius: 6px;
-    padding: 1rem;
-    font-size: 0.8rem;
-    color: #d4a85a;
-    margin-bottom: 1.5rem;
-  }
-  footer { visibility: hidden; }
+
+  /* Scrollbar Aesthetics */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #05070a; }
+  ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
 </style>
 """, unsafe_allow_html=True)
-
 
 # ─────────────────────────────────────────────
 # SIMULATED DATA (runs without h5ad file)
@@ -169,20 +148,26 @@ def load_or_simulate_data():
     np.random.seed(42)
     n_cells = 5000  # Subset for fast rendering (full = 65,956)
 
-    CELL_TYPES = {
-        '319 Astro-TE NN':         {'color': '#5ecfb0', 'region': 'both',  'n': 600},
-        '318 Astro-NT NN':         {'color': '#3aa88e', 'region': 'both',  'n': 400},
-        '321 Astroependymal NN':   {'color': '#2d8a74', 'region': 'CA1',   'n': 200},
-        '320 Astro-OLF NN':        {'color': '#1f6b5a', 'region': 'CA1',   'n': 150},
-        '334 Microglia NN':        {'color': '#d4a85a', 'region': 'both',  'n': 500},
-        '053 Sst Gaba':            {'color': '#e05c5c', 'region': 'CA1',   'n': 300},
-        '056 Sst Chodl Gaba':      {'color': '#b03030', 'region': 'CA1',   'n': 150},
-        '052 Pvalb Gaba':          {'color': '#e0905c', 'region': 'CA1',   'n': 350},
-        '051 Pvalb chandelier Gaba':{'color': '#c07030', 'region': 'CA1',  'n': 100},
-        '016 CA1-ProS Glut':       {'color': '#8fa8e0', 'region': 'CA1',   'n': 700},
-        '017 CA3 Glut':            {'color': '#5c80d4', 'region': 'CA1',   'n': 250},
-        '037 DG Glut':             {'color': '#a8e05c', 'region': 'DG',    'n': 800},
-    }
+    # Replace your current CELL_TYPES colors with these:
+DESIGNER_PALETTE = {
+    # Glia (Cool/Ocean Tones)
+    '319 Astro-TE NN': '#2dd4bf',      # Mint
+    '318 Astro-NT NN': '#0d9488',      # Teal
+    '321 Astroependymal NN': '#0891b2', # Cyan
+    '320 Astro-OLF NN': '#0369a1',     # Deep Blue
+    '334 Microglia NN': '#fbbf24',     # Amber (Surveillance Accent)
+    
+    # Interneurons (Deep Purples/Pinks)
+    '053 Sst Gaba': '#818cf8',         # Indigo
+    '056 Sst Chodl Gaba': '#6366f1',   # Royal Blue
+    '052 Pvalb Gaba': '#c084fc',       # Purple
+    '051 Pvalb chandelier Gaba': '#a855f7', # Violet
+    
+    # Excitatory Neurons (Warm/Earthy Tones)
+    '016 CA1-ProS Glut': '#fb7185',    # Rose
+    '017 CA3 Glut': '#e11d48',         # Crimson
+    '037 DG Glut': '#f43f5e',          # Strawberry (The Target)
+}
 
     rows = []
 
