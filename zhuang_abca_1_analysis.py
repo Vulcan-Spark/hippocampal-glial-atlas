@@ -8,10 +8,21 @@ Original file is located at
 
 # **Phase 1: Setup & Installation**
 """
+# -*- coding: utf-8 -*-
+import pandas as pd
+import anndata
+import scanpy as sc
+import squidpy as sq
+import streamlit as st # Add this for deployment
+from pathlib import Path
+import warnings
+from abc_atlas_access.abc_atlas_cache.abc_project_cache import AbcProjectCache
 
+# ... rest of your analysis code ...
 # Install the Allen toolkit for streamlit
 import subprocess
 import sys
+
 
 def install():
     subprocess.check_call([sys.executable, "-m", "pip", "install", "abc_atlas_access[notebooks] @ git+https://github.com/alleninstitute/abc_atlas_access.git"])
