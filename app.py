@@ -144,33 +144,56 @@ def load_or_simulate_data():
     except Exception:
         pass
 
-    # ── SIMULATED DATA ─────────────────────────────────────
+# ── DESIGNER SIMULATED DATA ─────────────────────────────────────
     np.random.seed(42)
-    n_cells = 5000  # Subset for fast rendering (full = 65,956)
-
-    # Replace your current CELL_TYPES colors with these:
-DESIGNER_PALETTE = {
-    # Glia (Cool/Ocean Tones)
-    '319 Astro-TE NN': '#2dd4bf',      # Mint
-    '318 Astro-NT NN': '#0d9488',      # Teal
-    '321 Astroependymal NN': '#0891b2', # Cyan
-    '320 Astro-OLF NN': '#0369a1',     # Deep Blue
-    '334 Microglia NN': '#fbbf24',     # Amber (Surveillance Accent)
     
-    # Interneurons (Deep Purples/Pinks)
-    '053 Sst Gaba': '#818cf8',         # Indigo
-    '056 Sst Chodl Gaba': '#6366f1',   # Royal Blue
-    '052 Pvalb Gaba': '#c084fc',       # Purple
-    '051 Pvalb chandelier Gaba': '#a855f7', # Violet
-    
-    # Excitatory Neurons (Warm/Earthy Tones)
-    '016 CA1-ProS Glut': '#fb7185',    # Rose
-    '017 CA3 Glut': '#e11d48',         # Crimson
-    '037 DG Glut': '#f43f5e',          # Strawberry (The Target)
-}
+    # We define the populations and their new designer colors simultaneously
+    # Semantic Grouping: Teals/Blues = Glia, Purples = Interneurons, Roses = Excitatory
+    CELL_CONFIG = {
+        '319 Astro-TE NN':           {'color': '#2dd4bf', 'region': 'both', 'n': 600},
+        '318 Astro-NT NN':           {'color': '#0d9488', 'region': 'both', 'n': 400},
+        '321 Astroependymal NN':     {'color': '#0891b2', 'region': 'CA1',  'n': 200},
+        '320 Astro-OLF NN':          {'color': '#0369a1', 'region': 'CA1',  'n': 150},
+        '334 Microglia NN':          {'color': '#fbbf24', 'region': 'both', 'n': 500},
+        '053 Sst Gaba':              {'color': '#818cf8', 'region': 'CA1',  'n': 300},
+        '056 Sst Chodl Gaba':        {'color': '#6366f1', 'region': 'CA1',  'n': 150},
+        '052 Pvalb Gaba':            {'color': '#c084fc', 'region': 'CA1',  'n': 350},
+        '051 Pvalb chandelier Gaba': {'color': '#a855f7', 'region': 'CA1',  'n': 100},
+        '016 CA1-ProS Glut':         {'color': '#fb7185', 'region': 'CA1',  'n': 700},
+        '017 CA3 Glut':              {'color': '#e11d48', 'region': 'CA1',  'n': 250},
+        '037 DG Glut':               {'color': '#f43f5e', 'region': 'DG',   'n': 800},
+    }
 
     rows = []
+    for ct, props in CELL_CONFIG.items():
+        n = props['n']
+        region = props['region']
 
+        # CA1 Logic (C-Shape Arch)
+        if region == 'CA1' or region == 'both':
+            n_ca1 = n if region == 'CA1' else n // 2
+            t = np.random.uniform(0.3, 2.8, n_ca1)
+            r = 3.5 + np.random.normal(0, 0.35, n_ca1)
+            x = r * np.cos(t) + np.random.normal(0, 0.1, n_ca1)
+            y = r * np.sin(t) + np.random.normal(0, 0.1, n_ca1)
+            for i in range(n_ca1):
+                rows.append({'x': float(x[i]), 'y': float(y[i]), 
+                             'subclass': ct, 'region': 'CA1', 
+                             'color': props['color']})
+
+        # DG Logic (Dense V-Shape)
+        if region == 'DG' or region == 'both':
+            n_dg = n if region == 'DG' else n // 2
+            t = np.random.uniform(-0.5, 1.2, n_dg)
+            r = 1.8 + np.random.normal(0, 0.25, n_dg)
+            x = r * np.cos(t) + 1.5 + np.random.normal(0, 0.08, n_dg)
+            y = r * np.sin(t) - 1.2 + np.random.normal(0, 0.08, n_dg)
+            for i in range(n_dg):
+                rows.append({'x': float(x[i]), 'y': float(y[i]), 
+                             'subclass': ct, 'region': 'DG', 
+                             'color': props['color']})
+
+    obs = pd.DataFrame(rows)
     # CA1 region: C-shape, upper left
     # DG region: tighter C-shape, lower right
     for ct, props in CELL_TYPES.items():
