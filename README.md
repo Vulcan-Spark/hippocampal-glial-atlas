@@ -1,5 +1,6 @@
 # 🧠 Hippocampal Glial Niche Atlas
 ### *A Computational Blueprint of the Healthy Hippocampus*
+**[Explore the Interactive Web Atlas Here](https://vulcan-spark-hippocampal-glial-atlas.streamlit.app/#a-computational-blueprintof-the-healthy-hippocampus)**
 
 > **"Before we can understand how the brain breaks, we must first precisely define how it is built."**
 
